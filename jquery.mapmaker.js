@@ -9,20 +9,15 @@
 
 (function( $ ) {
 	$.fn.mapmaker = function (method) {
-					
-		//					var x,y,registered;
-		//					var polyXarray = new Array();
-		//					var polyYarray = new Array();
 
 		var methods = {
 			init : function( options ) { 
 							
-				var $this = $(this),
-				data = $this.data('mapmaker');
-							
-							
-				if(!data) {
-					$(this).data('mapmaker', {
+				var $this = $(this);
+				var data = $this.data('mapmaker');
+											
+				if(typeof data  == "undefined") {
+					$this.data('mapmaker', {
 						x: 0,
 						y: 0,
 						polyXarray : new Array(),
@@ -49,7 +44,6 @@
 				$(settings.deleLink).click({
 					mapimage: $(this)
 					}, delete_imagemap);
-					
 				
 				data.type = settings.type;			
 				data.update = settings.update;
@@ -81,7 +75,7 @@
 		} else if ( typeof method === 'object' || ! method ) {
 			return methods.init.apply( this, arguments );
 		} else {
-			$.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
+			$.error( 'Method ' +  method + ' does not exist in jQuery.mapmaker' );
 		}    
 					
 					

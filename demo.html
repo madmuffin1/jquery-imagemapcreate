@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<style type="text/css">
+
+			.map {
+/*				background-color: #F0F0F0;
+				background-repeat: no-repeat;
+				border: 1px solid black;*/
+				cursor: crosshair;
+				/*height: auto;*/
+/*				margin-bottom: 30px;
+				margin-top: 30px;
+				position: relative;
+				width: 200px;*/
+			}
+
+		</style>
+
+		<!-- jQuery -->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+		
+		<!-- imagemapcreate -->
+		<script type="text/javascript" src="jquery.mapmaker.js"></script>
+		
+		<!-- these are just for the live highlighting -->
+		<script type="text/javascript" src="http://davidlynch.org/projects/maphilight/jquery.maphilight.js"></script>
+		<script type="text/javascript" src="http://keith-wood.name/js/jquery.svg.js"></script>		
+		<script type="text/javascript" src="http://keith-wood.name/js/jquery.svganim.js"></script>
+		<script type="text/javascript" src="http://keith-wood.name/js/jquery.svgdom.js"></script>
+		<script type="text/javascript" src="http://keith-wood.name/js/jquery.svgfilter.js"></script>
+		<script type="text/javascript" src="http://keith-wood.name/js/jquery.svggraph.js"></script>
+		<script type="text/javascript" src="http://keith-wood.name/js/jquery.svgplot.js"></script>
+
+	</head>
+	<body>
+
+		<h2>jQuery ImageMap Maker (P. Brückner)</h2>
+
+		<div>Select Tool:
+			<ul>
+				<li><a href="#r" class="rect"><img src="images/hi16-action-tool_rectangle.png" border="0">Rectangle (selected by default)</a>
+				<li><a href="#p" class="poly"><img src="images/hi16-action-tool_polygon.png" border="0">Polygon</a>
+				<li><a href="#e" class="erase"><img src="images/hi16-action-tool_eraser.png" border="0">Erase</a>
+			</ul>
+		</div>
+
+		Now you can create a imagemap with the selected tool.
+		<div id="mapmaker" class="map">
+			<img src="http://images.wikia.com/yugiohpedia/images/2/24/YGO-Zexal-Ep-24-IMG-002-200x85.png"> 
+		</div>
+
+		Hover over this image to see the live rendered imagemap:
+		<div id="imagemap" class="">
+			<img src="http://images.wikia.com/yugiohpedia/images/2/24/YGO-Zexal-Ep-24-IMG-002-200x85.png" usemap="#test"  id="mapimg"> 
+			<map name="test" id="themap">
+				
+			</map>
+		</div>
+
+		<div>
+			Generated Area-Tag:
+			<pre id="code"></pre>
+		</div>
+
+		<script type="text/javascript"> 
+			
+		$('#mapmaker').mapmaker('init', {
+			'update': update,
+			'rectLink': '.rect',
+			'polyLink': '.poly',
+			'deleLink': '.erase',
+			'type': 'tag'
+		});
+
+		function update(area) {
+			// Display code
+			$('#code').html(area.replace(/</g,'&lt;'));
+			// Insert area-tag into map and highlight preview
+			$('#themap').html(area);
+			$('#mapimg').maphilight();
+		}
+
+ 
+		</script>
+
+
+	</body>
+</html>
